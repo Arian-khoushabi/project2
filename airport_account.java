@@ -10,7 +10,6 @@ public class airport_account {
         for (int i = 0; i < 10; i++) {
             admin.setBookedTickets("_",i);
         }
-        String[] Fields = new String[7];
         Flights[] flights = new Flights[10];
         for(int i=0;i<10;i++){
             flights[i]=new Flights();
@@ -81,6 +80,7 @@ public class airport_account {
                     break;
                 case 2:
                     System.out.println("PLEASE ENTER YOUR PASSWORD");
+                    System.err.println("maybe you have to enter your password twice");
                     int pass = input.nextInt();
                     if (pass == admin.getPassword()) {
                         int command2 = menu3.Show_passenger_menu();
@@ -91,14 +91,8 @@ public class airport_account {
                                     command2 = menu3.Show_passenger_menu();
                                     break;
                                 case 2:
-                                    int n = input.nextInt();
-                                    for (int i = 0; i < n; i++) {
-                                        Fields[i] = input.next();
-                                    }
-                                    menu3.FindTickets(Flight_table, Fields, admin);
-                                    for (int i = 0; i < 7; i++) {
-                                        Fields[i]=".";
-                                    }
+                                    menu3.FindTickets(Flight_table);
+                                    System.out.println();
                                     command2 = menu3.Show_passenger_menu();
                                     break;
                                 case 3:

@@ -30,12 +30,19 @@ public class Admin_menu_option {
         return digit;
     }
     public void ADD_update(Flights[] flights, int row_number){
+        System.out.println(" Flight_Id:");
         String FlightID=input.next();
+        System.out.println(" Origin:");
         String Origin=input.next();
+        System.out.println(" Destination:");
         String Destination = input.next();
+        System.out.println(" Date:");
         String Date=input.next();
+        System.out.println(" Time:");
         String Time = input.next();
+        System.out.println(" Price:");
         int Price = input.nextInt();
+        System.out.println(" Seats:");
         int Seats =input.nextInt();
         flights[row_number].setFlightId(FlightID);
         flights[row_number].setOrigin(Origin);
