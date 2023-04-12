@@ -1,4 +1,4 @@
 Project "simulation of Airline Reservation System" , the second project of course "Advanced Programming", is finished.
-I have used  6 classes (counting the main class) for writing the program.
-{Flights,Admin,Admin menu,Passenger menu,Project functions} pluss main(Airport account)
+I have used  7 classes (counting the main class) for writing the program.
+{Flights,Admin,Admin menu,Passenger menu,Project functions,search} plus main(Airport account)
 https://github.com/Arian-khoushabi/project2#project2
