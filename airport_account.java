@@ -7,6 +7,7 @@ public class airport_account {
         project_function menu1 = new project_function();
         Admin_menu_option menu2 = new Admin_menu_option();
         passenger_menu_options menu3 = new passenger_menu_options();
+        searchTest search=new searchTest();
         for (int i = 0; i < 10; i++) {
             admin.setBookedTickets("_",i);
         }
@@ -91,7 +92,7 @@ public class airport_account {
                                     command2 = menu3.Show_passenger_menu();
                                     break;
                                 case 2:
-                                    menu3.FindTickets(Flight_table);
+                                    search.Find(flights);
                                     System.out.println();
                                     command2 = menu3.Show_passenger_menu();
                                     break;
