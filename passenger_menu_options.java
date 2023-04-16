@@ -32,29 +32,25 @@ public class passenger_menu_options {
         int digit=input.nextInt();
         return digit;
     }
-
-    public void password_change(Admin admin){
-        int password=input.nextInt();
-        admin.setPassword(password);
-    }
     public void BookTickets(Flights[] flights,Admin admin){
         System.out.println("Enter your Flight_Id:");
         String flightID=input.next();
         for(int i=0;i<10;i++){
             if(Objects.equals(flights[i].getFlightId(), flightID)){
-                if (flights[i].getIntPrice()>=admin.getCharge()) {
+                if (flights[i].getIntPrice()<=admin.getCharge()) {
                     for (int j = 0; j < 10; j++) {
                         if (Objects.equals(admin.getBookedTickets(j), "_")) {
-                            flights[i].seatReserve();
+                            flights[i].setSeats((flights[i].getSeats())-1);
                             flights[i].setSeat();
                             admin.setBookedTickets(flightID, j);
-                            admin.setCharge(admin.getCharge()-flights[i].getIntPrice());
+                            admin.setCharge(admin.getCharge()-(flights[i].getIntPrice()));
                             break;
                         }
                     }
                 }
                 else {
-                    System.out.println("NOT ENOUGH CHARGE!");
+                    System.err.println("NOT ENOUGH CHARGE!");
+                    break;
                 }
             }
         }
@@ -67,10 +63,11 @@ public class passenger_menu_options {
             if(Objects.equals(flightID, admin.getBookedTickets(i))){
                 for(int j=0;j<10;j++){
                     if(Objects.equals(flights[j].getFlightId(), flightID)){
-                        flights[j].seatUnreserved();
+                        flights[j].setSeats((flights[j].getSeats())+1);
                         flights[j].setSeat();
                         admin.setBookedTickets("_",i);
                         admin.setCharge(admin.getCharge()+flights[j].getIntPrice());
+                        break;
                     }
                 }
             }
@@ -97,6 +94,8 @@ public class passenger_menu_options {
     }
 
     public void AddCharge(Admin admin){
+        System.out.println("your charge is:");
+        System.out.println(admin.getCharge());
         System.out.println("Enter the amount of money you wanna add to your charge:");
         int addition=input.nextInt();
         admin.setCharge(admin.getCharge()+addition);

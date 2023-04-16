@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 public class searchTest {
     Scanner input=new Scanner(System.in);
-    public String search(int command,int index,Flights[] flights){
+    public String search(int command,int index,Flights[] flights,int[] range){
         String returnField;
         switch (command) {
             case 0:
@@ -22,7 +22,13 @@ public class searchTest {
                 returnField = flights[index].getTime();
                 break;
             case 5:
-                returnField = flights[index].getStringPrice();
+                range[1]=flights[index].getIntPrice();
+                if (range[1]<=range[2] && range[0]<=range[1]) {
+                    returnField = "FINE";
+                }
+                else {
+                    returnField="dont care";
+                }
                 break;
             case 6:
                 returnField = flights[index].getSeat();
@@ -33,6 +39,7 @@ public class searchTest {
         return returnField;
     }
     public void Find(Flights[] flights){
+        int[] range=new int[3];
         System.out.println("please enter the number of fields you wanna search:");
         int N=input.nextInt();
         int[] command=new int[N];
@@ -47,6 +54,15 @@ public class searchTest {
         for (int i = 0; i < N; i++) {
             command[i]=input.nextInt();
         }
+        for (int i = 0; i < N; i++) {
+            if(command[i]==5){
+                System.out.println("one of your commands was price, so please do the fallowing orders:");
+                System.out.println("your low rage is:");
+                range[0]=input.nextInt();
+                System.out.println("your high rage is:");
+                range[2]=input.nextInt();
+            }
+        }
         String[] Field=new String[N];
         System.out.println("Enter your phrase:");
         for (int i = 0; i < N; i++) {
@@ -55,18 +71,24 @@ public class searchTest {
         for (int i = 0; i < 10; i++) {
             int flag = 0;
             for (int j = 0; j < N; j++) {
-                if (Objects.equals(search(command[j], i, flights), Field[j])) {
+                if (command[j] == 5) {
+                    Field[j]=search(5,i,flights,range);
+                    if (!Objects.equals(Field[j], "FINE")){
+                        break;
+                    }
+                }
+                if (Objects.equals(search(command[j], i, flights,range), Field[j])) {
                     flag++;
                 }
-                if (flag == N) {
-                    System.out.println(flights[i].getFlightId() + "  ");
-                    System.out.print(flights[i].getOrigin() + "   ");
-                    System.out.print(flights[i].getDestination() + "  ");
-                    System.out.print(flights[i].getDate() + "   ");
-                    System.out.print(flights[i].getTime() + "   ");
-                    System.out.print(flights[i].getStringPrice() + "   ");
-                    System.out.print(flights[i].getSeat());
-                }
+            }
+            if (flag == N) {
+                System.out.print(flights[i].getFlightId() + "  ");
+                System.out.print(flights[i].getOrigin() + "   ");
+                System.out.print(flights[i].getDestination() + "  ");
+                System.out.print(flights[i].getDate() + "   ");
+                System.out.print(flights[i].getTime() + "   ");
+                System.out.print(flights[i].getStringPrice() + "   ");
+                System.out.print(flights[i].getSeat());
             }
         }
     }

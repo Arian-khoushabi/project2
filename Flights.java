@@ -75,10 +75,4 @@ public class Flights {
     public void setSeats(int seats) {
         this.seats = seats;
     }
-    public void seatReserve(){
-        seats--;
-    }
-    public void seatUnreserved(){
-        seats++;
-    }
 }

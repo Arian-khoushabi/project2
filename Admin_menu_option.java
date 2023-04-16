@@ -1,3 +1,4 @@
+import java.util.Objects;
 import java.util.Scanner;
 
 public class Admin_menu_option {
@@ -55,7 +56,15 @@ public class Admin_menu_option {
 
 
     }
-    public void Remove(Flights[] flights, int row_number){
+    public void Remove(Flights[] flights, int row_number,Admin[] passengers){
+        for (int i = 0; i < 100; i++) {
+            for (int j = 0; j < 10; j++) {
+                if (Objects.equals(passengers[i].getBookedTickets(j), flights[row_number].getFlightId())){
+                    passengers[i].setBookedTickets("_",j);
+                    passengers[i].setCharge(passengers[i].getCharge()+flights[row_number].getIntPrice());
+                }
+            }
+        }
         flights[row_number].setFlightId("_");
         flights[row_number].setOrigin("_");
         flights[row_number].setDestination("_");

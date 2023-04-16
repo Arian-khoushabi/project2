@@ -2,7 +2,6 @@ import java.util.Scanner;
 
 public class project_function {
     Scanner input=new Scanner(System.in);
-    Flights flights = new Flights();
     public int Show_menu_options() {
         for (int i = 1; i <= 60; i++) {
             System.out.print(":");
@@ -31,7 +30,7 @@ public class project_function {
         int digit = input.nextInt();
         return digit;
     }
-    public void FlightTable(String Flight_table[][]){
+    public void FlightTable(String [][]Flight_table){
         Flight_table[0][0]="FLIGHT_ID";
         Flight_table[0][1]="ORIGIN";
         Flight_table[0][2]="DESTINATION";
@@ -47,7 +46,7 @@ public class project_function {
         }
         System.out.println();
     }
-    public void setFlight(String Flight_table[][],Flights[] flights,int i){
+    public void setFlight(String[][] Flight_table,Flights[] flights,int i){
         Flight_table[i][0]= flights[i].getFlightId();
         Flight_table[i][1]= flights[i].getOrigin();
         Flight_table[i][2]= flights[i].getDestination();
@@ -56,7 +55,7 @@ public class project_function {
         Flight_table[i][5]= flights[i].getStringPrice();
         Flight_table[i][6]= flights[i].getSeat();
     }
-    public void setFlights1(String Flight_table[][],Flights flights[]){
+    public void setFlights1(String[][] Flight_table,Flights[] flights){
         Flight_table[1][0]="mo_15";
         Flight_table[1][1]= "Tehran";
         Flight_table[1][2]= "Tabriz";
