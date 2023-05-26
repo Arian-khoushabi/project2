@@ -2,7 +2,15 @@ public class Admin {
     private int Password;
     private String UserName;
     private int Charge;
-    private String[] BookedTickets = new String[10];
+
+    public Admin(int password, String userName, int charge, String[] bookedTickets) {
+        Password = password;
+        UserName = userName;
+        Charge = charge;
+        BookedTickets = bookedTickets;
+    }
+
+    private String[] BookedTickets;
     public int getPassword() {
         return Password;
     }
@@ -30,5 +38,8 @@ public class Admin {
     }
     public void setBookedTickets(String bookedTickets,int index) {
         BookedTickets[index] = bookedTickets;
+    }
+    public String[] getAllBookedTickets(){
+        return BookedTickets;
     }
 }

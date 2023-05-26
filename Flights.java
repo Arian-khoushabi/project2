@@ -1,4 +1,15 @@
+import java.io.RandomAccessFile;
+
 public class Flights {
+    public Flights(String flightId, String origin, String destination, String date, String time, int price, int seats) {
+        this.flightId = flightId;
+        this.origin = origin;
+        this.destination = destination;
+        this.date = date;
+        this.time = time;
+        this.price = price;
+        this.seats = seats;
+    }
 
     private String flightId;
     private String origin;
@@ -7,7 +18,6 @@ public class Flights {
     private String time;
     private int price;
     private String seat;
-
     private int seats;
     public String getFlightId() {
         return flightId;

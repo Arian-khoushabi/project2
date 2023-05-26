@@ -30,7 +30,7 @@ public class Admin_menu_option {
         int digit=input.nextInt();
         return digit;
     }
-    public void ADD_update(Flights[] flights, int row_number){
+    public Flights ADD_update(Flights[] flights, int row_number){
         System.out.println(" Flight_Id:");
         String FlightID=input.next();
         System.out.println(" Origin:");
@@ -45,16 +45,8 @@ public class Admin_menu_option {
         int Price = input.nextInt();
         System.out.println(" Seats:");
         int Seats =input.nextInt();
-        flights[row_number].setFlightId(FlightID);
-        flights[row_number].setOrigin(Origin);
-        flights[row_number].setDestination(Destination);
-        flights[row_number].setDate(Date);
-        flights[row_number].setTime(Time);
-        flights[row_number].setPrice(Price);
-        flights[row_number].setSeats(Seats);
         flights[row_number].setSeat();
-
-
+        return new Flights(FlightID,Origin,Destination,Date,Time,Price,Seats);
     }
     public void Remove(Flights[] flights, int row_number,Admin[] passengers){
         for (int i = 0; i < 100; i++) {
@@ -65,14 +57,16 @@ public class Admin_menu_option {
                 }
             }
         }
-        flights[row_number].setFlightId("_");
-        flights[row_number].setOrigin("_");
-        flights[row_number].setDestination("_");
-        flights[row_number].setDate("_");
-        flights[row_number].setTime("_");
-        flights[row_number].setPrice(0);
-        flights[row_number].setSeats(0);
+        flights[row_number]=new Flights("_","_","_","_","_",0,0);
         flights[row_number].setSeat();
-
+        Shift(flights,row_number);
+    }
+    private void Shift(Flights[] flights,int index){
+        Flights tmp;
+        for (int i = index, j=i+1 ; i <9 ; i++) {
+                tmp=flights[i];
+                flights[i]=flights[j];
+                flights[j]=tmp;
+        }
     }
 }

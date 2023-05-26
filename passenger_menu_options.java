@@ -32,7 +32,12 @@ public class passenger_menu_options {
         int digit=input.nextInt();
         return digit;
     }
-    public void BookTickets(Flights[] flights,Admin admin){
+    public void BookTickets(Flights[] flights,Admin admin,int index){
+        int flag=0;
+        System.out.println("The available tickets are:");
+        for (int i=0;i<index;i++){
+            System.out.println(flights[i].getFlightId());
+        }
         System.out.println("Enter your Flight_Id:");
         String flightID=input.next();
         for(int i=0;i<10;i++){
@@ -44,19 +49,25 @@ public class passenger_menu_options {
                             flights[i].setSeat();
                             admin.setBookedTickets(flightID, j);
                             admin.setCharge(admin.getCharge()-(flights[i].getIntPrice()));
+                            flag++;
                             break;
                         }
                     }
                 }
                 else {
                     System.err.println("NOT ENOUGH CHARGE!");
+                    flag++;
                     break;
                 }
             }
         }
+        if (flag==0){
+            System.err.println("NOT FOUND!");
+        }
     }
 
     public void CancelTickets(Flights[] flights,Admin admin){
+        int flag=0;
         System.out.println("Enter your Flight_Id:");
         String flightID=input.next();
         for(int i=0;i<10;i++){
@@ -67,14 +78,19 @@ public class passenger_menu_options {
                         flights[j].setSeat();
                         admin.setBookedTickets("_",i);
                         admin.setCharge(admin.getCharge()+flights[j].getIntPrice());
+                        flag++;
                         break;
                     }
                 }
             }
         }
+        if (flag==0){
+            System.err.println("NOT FOUND!");
+        }
     }
 
     public void ShowMyTickets(Admin admin,Flights[] flights){
+        int flag=0;
         for(int i = 0 ; i<10 ; i++) {
             if (!Objects.equals(admin.getBookedTickets(i), "_")) {
                 for (int j = 0; j < 10; j++) {
@@ -86,10 +102,14 @@ public class passenger_menu_options {
                         System.out.print(flights[j].getTime()+"  ");
                         System.out.print(flights[j].getStringPrice()+"  ");
                         System.out.print(flights[j].getSeat()+"  ");
+                        flag++;
                     }
                 }
                 System.out.println();
             }
+        }
+        if (flag==0){
+            System.err.println("YOU DONT HAVE ANY TICKETS!");
         }
     }
 
