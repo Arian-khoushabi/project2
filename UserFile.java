@@ -13,18 +13,15 @@ public class UserFile {
         rFile.writeChars(FixToWrite(passenger.getUserName()));
         rFile.writeInt(passenger.getCharge());
         for (int i = 0; i <10 ; i++) {
-            rFile.writeChars(FixToWrite(passenger.getBookedTickets(i)));
+            if (!Objects.equals(passenger.getBookedTickets(i), "_")) {
+                rFile.writeChars(FixToWrite(passenger.getBookedTickets(i)));
+            }
+            else {
+                for (int j = 0; j < 668; j++) {
+                    rFile.writeChars(" ");
+                }
+            }
         }
-    }
-    public Admin readUserFile(Admin passenger)throws IOException{
-        passenger.setPassword(rFile.readInt());
-        passenger.setUserName(FixToRead());
-        passenger.setCharge(rFile.readInt());
-        for (int i = 0; i < 10; i++) {
-            if (!Objects.equals(passenger.getBookedTickets(i), "_"))
-                 passenger.setBookedTickets(FixToRead(),i);
-        }
-        return new Admin(passenger.getPassword(),passenger.getUserName(),passenger.getCharge(),passenger.getAllBookedTickets());
     }
     private String FixToWrite(String str){
         StringBuilder strBuilder = new StringBuilder(str);
@@ -33,12 +30,5 @@ public class UserFile {
         }
         str = strBuilder.toString();
         return str.substring(0,FIX_SIZE);
-    }
-    private String FixToRead()throws IOException{
-        StringBuilder tmp= new StringBuilder();
-        for (int i = 0; i < FIX_SIZE; i++) {
-            tmp.append(rFile.readChar());
-        }
-        return tmp.toString().trim();
     }
 }

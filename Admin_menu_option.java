@@ -62,11 +62,8 @@ public class Admin_menu_option {
         Shift(flights,row_number);
     }
     private void Shift(Flights[] flights,int index){
-        Flights tmp;
-        for (int i = index, j=i+1 ; i <9 ; i++) {
-                tmp=flights[i];
-                flights[i]=flights[j];
-                flights[j]=tmp;
+        for (int i = index ; i <9 ; i++) {
+                flights[i]=flights[i+1];
         }
     }
 }

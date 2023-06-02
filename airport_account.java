@@ -30,8 +30,8 @@ public class airport_account {
             FlightFile flightFile=new FlightFile(fFile);
             RandomAccessFile pFile = new RandomAccessFile("User.dat", "rw");
             UserFile userFile = new UserFile(pFile);
-            for (int i = 0; i < lastIndexOfFlights; i++) {
-                    fFile.seek(i*308);
+            for (int i = 0; i <= lastIndexOfFlights; i++) {
+                    fFile.seek(i*308L);
                     flightFile.writeFlightsInfoFile(flights[i]);
             }
         while (true) {
@@ -88,9 +88,12 @@ public class airport_account {
                                     for (int i = 0; i <= lastIndexOfFlights; i++) {
                                         if (Objects.equals(flightID, flights[i].getFlightId())) {
                                             menu2.Remove(flights, i, passengers);
-                                            lastIndexOfFlights--;
                                             try {
-                                                for (int j = 0; j <=lastIndexOfFlights; j++) {
+                                                fFile.seek(lastIndexOfFlights*308L);
+                                                for (int j = 0; j < 308; j++) {
+                                                    fFile.writeChars(" ");
+                                                }
+                                                for (int j = 0; j <=lastIndexOfFlights-1; j++) {
                                                     fFile.seek(j* 308L);
                                                     flightFile.writeFlightsInfoFile(flights[j]);
                                                 }
@@ -102,6 +105,7 @@ public class airport_account {
                                             catch (IOException e){
                                                 e.printStackTrace();
                                             }
+                                            lastIndexOfFlights--;
                                             flag++;
                                             break;
                                         }
@@ -121,8 +125,20 @@ public class airport_account {
                         break;
                     }
                     for (int i = 0; i < indexOfPassengers; i++) {
+                        int validation=0;
                         pFile.seek(i* 668L);
-                        if (Objects.equals(pFile.readInt(),pass) && Objects.equals(passengers[i].getUserName(), name)) {
+                        if (Objects.equals(pFile.readInt(),pass)){
+                            validation++;
+                        }
+                        String readName="";
+                        pFile.seek((i* 668L)+4);
+                        for (int j=0;j<30;j++){
+                            readName+=pFile.readChar();
+                        }
+                        if (readName.trim().equals(name)){
+                            validation++;
+                        }
+                        if (validation==2){
                             System.out.println("WELCOME " + passengers[i].getUserName());
                             int command2 = menu3.Show_passenger_menu();
                             while (command2 != 0) {

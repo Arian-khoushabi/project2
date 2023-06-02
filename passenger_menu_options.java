@@ -35,7 +35,7 @@ public class passenger_menu_options {
     public void BookTickets(Flights[] flights,Admin admin,int index){
         int flag=0;
         System.out.println("The available tickets are:");
-        for (int i=0;i<index;i++){
+        for (int i=0;i<=index;i++){
             System.out.println(flights[i].getFlightId());
         }
         System.out.println("Enter your Flight_Id:");
@@ -78,6 +78,7 @@ public class passenger_menu_options {
                         flights[j].setSeat();
                         admin.setBookedTickets("_",i);
                         admin.setCharge(admin.getCharge()+flights[j].getIntPrice());
+                        Shift(admin,i);
                         flag++;
                         break;
                     }
@@ -120,6 +121,10 @@ public class passenger_menu_options {
         int addition=input.nextInt();
         admin.setCharge(admin.getCharge()+addition);
     }
-
+    private void Shift(Admin passengers,int index){
+        for (int i = index ; i <9 ; i++) {
+            passengers.setBookedTickets(passengers.getBookedTickets(i+1),i);
+        }
+    }
 
 }
